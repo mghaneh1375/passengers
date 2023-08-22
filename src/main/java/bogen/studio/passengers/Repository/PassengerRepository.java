@@ -15,10 +15,10 @@ public interface PassengerRepository extends MongoRepository<Passenger, ObjectId
     @Query(value = "{ 'user_id': ?0, $or: [ { 'NID': ?1 }, { 'passport_no': ?1 }, { 'citizen_no': ?1 } ] }")
     Passenger findByUnique(ObjectId userId, String unique);
 
-    @Query(value = "{ 'user_id': ?0, 'removed_at': { $exists: false } }", fields = "{ 'user_id': 0, 'created_at': 0 }")
+    @Query(value = "{ 'user_id': ?0, 'removed_at': { $exists: false } }", fields = "{ 'user_id': 0, 'created_at': 0, 'removed_at': 0 }")
     List<Passenger> findByUserId(ObjectId userId);
 
-    @Query(value = "{ '_id': { $in: ?0 } }", fields = "{ '_id': 0, 'user_id': 0, 'created_at': 0 }")
+    @Query(value = "{ '_id': { $in: ?0 } }", fields = "{ '_id': 0, 'user_id': 0, 'created_at': 0, 'removed_at': 0 }")
     List<Passenger> findByIdsIn(List<ObjectId> ids);
 
     @Query(value = "{ 'user_id': ?0, '_id': ?1 }")

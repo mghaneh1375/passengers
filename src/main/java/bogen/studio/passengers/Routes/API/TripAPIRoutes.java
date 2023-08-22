@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
+import static bogen.studio.passengers.Utility.Statics.FAKE_USER_ID;
+
 @RestController
 @RequestMapping(path = "/api/public/trip")
 @Validated
@@ -34,7 +36,7 @@ public class TripAPIRoutes {
     public String getTripPassengers(HttpServletRequest request,
                                     @PathVariable @ObjectIdConstraint ObjectId tripId) {
         //todo userId
-        return passengerService.getTripPassengers(new ObjectId("64e0af975bfd9f7e5ec45dcf"), tripId, false);
+        return passengerService.getTripPassengers(FAKE_USER_ID, tripId);
     }
 
 }

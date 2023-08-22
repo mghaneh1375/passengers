@@ -39,4 +39,7 @@ public class Trip {
     @CreatedDate
     private Date createdAt;
 
+    @Field("expire_at")
+    private Long expireAt;
+
 }

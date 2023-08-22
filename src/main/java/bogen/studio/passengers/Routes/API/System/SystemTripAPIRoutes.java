@@ -23,7 +23,7 @@ public class SystemTripAPIRoutes {
                                     @PathVariable @ObjectIdConstraint ObjectId tripId,
                                     @PathVariable @ObjectIdConstraint ObjectId userId) {
         //todo authorize
-        return passengerService.getTripPassengers(userId, tripId, true);
+        return passengerService.getTripPassengers(userId, tripId);
     }
 
 }

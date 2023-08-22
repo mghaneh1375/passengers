@@ -1,8 +1,13 @@
 package bogen.studio.passengers.Utility;
 
+import org.bson.types.ObjectId;
 import org.json.JSONObject;
 
 public class Statics {
+
+    public final static long ONE_HOUR_MSEC = 60 * 60 * 1000;
+
+    public final static ObjectId FAKE_USER_ID = new ObjectId("64e0af975bfd9f7e5ec45dcf");
 
     public static final String JSON_OK = new JSONObject().put("status", "ok").toString();
     public static final String JSON_NOT_VALID_TOKEN = new JSONObject().put("status", "nok").put("msg", "token is not valid").toString();

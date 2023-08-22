@@ -3,7 +3,7 @@ package bogen.studio.passengers.Enum;
 public enum AgeType {
 
 
-    ADULT("بزرگسال"), CHILD("کودک"), INFANT("نوزاد");
+    ADULT("بزرگسال"), CHILD("خردسال"), INFANT("نوزاد");
 
     private String faValue;
 

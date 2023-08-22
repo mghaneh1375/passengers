@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static bogen.studio.passengers.Utility.Statics.*;
 import static bogen.studio.passengers.Utility.Utility.generateSuccessMsg;
@@ -34,7 +33,7 @@ public class PassengerService {
     public String list(ObjectId userId) {
 
         //todo: userId
-        userId = new ObjectId("64e0af975bfd9f7e5ec45dcf");
+        userId = FAKE_USER_ID;
         List<Passenger> passengers = passengerRepository.findByUserId(userId);
 
         JSONArray jsonArray = new JSONArray();
@@ -57,7 +56,7 @@ public class PassengerService {
     public String store(ObjectId userId, PassengerDTO createdBy, List<PassengerDTO> passengerDTO) {
 
         //todo: userId
-        userId = new ObjectId("64e0af975bfd9f7e5ec45dcf");
+        userId = FAKE_USER_ID;
 
         List<Passenger> modified = new ArrayList<>();
         List<ObjectId> ids = new ArrayList<>();
@@ -107,6 +106,7 @@ public class PassengerService {
             trip.setUserId(userId);
             trip.setPersons(ids);
             trip.setCreatedBy(creator.get_id());
+            trip.setExpireAt(System.currentTimeMillis() + 20 * 60 * 1000);
 
             tripRepository.insert(trip);
         }
@@ -123,7 +123,7 @@ public class PassengerService {
     public String remove(ObjectId userId, ObjectId id) {
 
         //todo: userId
-        userId = new ObjectId("64e0af975bfd9f7e5ec45dcf");
+        userId = FAKE_USER_ID;
 
         Passenger passenger = passengerRepository.findByUserIdAndId(userId, id);
         if(passenger == null)
@@ -171,9 +171,9 @@ public class PassengerService {
         return passenger;
     }
 
-    public String getTripPassengers(ObjectId userId, ObjectId tripId, boolean isForSystem) {
+    public String getTripPassengers(ObjectId userId, ObjectId tripId) {
 
-        Trip trip = tripRepository.findByUserIdAndId(userId, tripId);
+        Trip trip = tripRepository.findByUserIdAndId(userId, tripId, System.currentTimeMillis());
 
         if(trip == null)
             return JSON_NOT_ACCESS;
@@ -185,17 +185,15 @@ public class PassengerService {
 
             JSONObject jsonObject = new JSONObject(x);
 
-            if(!isForSystem) {
-                jsonObject.put("sex", x.getSex().toFarsi());
-                jsonObject.put("stayStatus", x.getStayStatus().toFarsi());
-                jsonObject.put("ageType", x.getAgeType().toFarsi());
-            }
+            jsonObject.put("sex", x.getSex().toFarsi());
+            jsonObject.put("stayStatus", x.getStayStatus().toFarsi());
+            jsonObject.put("ageType", x.getAgeType().toFarsi());
 
             jsonArray.put(jsonObject);
         });
 
         JSONObject result = new JSONObject()
-                .put("passengers", passengers);
+                .put("passengers", jsonArray);
 
         Passenger creator = passengerRepository.findById(trip.getCreatedBy()).orElse(null);
         if(creator != null) {
@@ -204,11 +202,9 @@ public class PassengerService {
             jsonObject.remove("_id");
             jsonObject.remove("userId");
 
-            if (!isForSystem) {
-                jsonObject.put("sex", creator.getSex().toFarsi());
-                jsonObject.put("stayStatus", creator.getStayStatus().toFarsi());
-                jsonObject.put("ageType", creator.getAgeType().toFarsi());
-            }
+            jsonObject.put("sex", creator.getSex().toFarsi());
+            jsonObject.put("stayStatus", creator.getStayStatus().toFarsi());
+            jsonObject.put("ageType", creator.getAgeType().toFarsi());
 
             result.put("creator", jsonObject);
         }
