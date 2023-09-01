@@ -17,7 +17,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import static bogen.studio.passengers.Utility.Utility.printException;
+import static bogen.studio.commonkoochita.Utility.Utility.printException;
 
 
 @ControllerAdvice

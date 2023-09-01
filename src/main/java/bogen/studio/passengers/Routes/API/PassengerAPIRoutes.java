@@ -1,5 +1,6 @@
 package bogen.studio.passengers.Routes.API;
 
+import bogen.studio.commonkoochita.Router.Router;
 import bogen.studio.passengers.Service.PassengerService;
 import bogen.studio.passengers.Validator.ObjectIdConstraint;
 import org.bson.types.ObjectId;
@@ -7,29 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @RestController
 @RequestMapping(path = "/api/public/passenger")
 @Validated
-public class PassengerAPIRoutes {
+public class PassengerAPIRoutes extends Router {
 
     @Autowired
     PassengerService passengerService;
 
     @GetMapping(value = "list")
     @ResponseBody
-    public String list(HttpServletRequest request) {
-        // todo: userId
-        return passengerService.list(new ObjectId());
+    public String list(Principal principal) {
+        return passengerService.list(getUserId(principal));
     }
 
     @DeleteMapping(value = "remove/{id}")
     @ResponseBody
-    public String remove(HttpServletRequest request,
+    public String remove(Principal principal,
                          @PathVariable @ObjectIdConstraint ObjectId id) {
-        // todo: userId
-        return passengerService.remove(new ObjectId(), id);
+        return passengerService.remove(getUserId(principal), id);
     }
 
 }

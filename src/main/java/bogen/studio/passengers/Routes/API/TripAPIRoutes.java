@@ -1,42 +1,40 @@
 package bogen.studio.passengers.Routes.API;
 
+import bogen.studio.commonkoochita.Router.Router;
+import bogen.studio.commonkoochita.Utility.ValidList;
 import bogen.studio.passengers.DTO.PassengerDTO;
 import bogen.studio.passengers.Service.PassengerService;
-import bogen.studio.passengers.Utility.ValidList;
 import bogen.studio.passengers.Validator.ObjectIdConstraint;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+import java.security.Principal;
 
-import static bogen.studio.passengers.Utility.Statics.FAKE_USER_ID;
 
 @RestController
 @RequestMapping(path = "/api/public/trip")
 @Validated
-public class TripAPIRoutes {
+public class TripAPIRoutes extends Router {
 
     @Autowired
     PassengerService passengerService;
 
     @PostMapping(value = "store")
     @ResponseBody
-    public String store(HttpServletRequest request,
+    public String store(Principal principal,
                         @RequestBody @Valid @Size(min = 1) ValidList<PassengerDTO> passengerDTOS) {
-        //todo: userId
-        return passengerService.store(new ObjectId(), passengerDTOS.get(0), passengerDTOS.subList(1, passengerDTOS.size()));
+        return passengerService.store(getUserId(principal), passengerDTOS.get(0), passengerDTOS.subList(1, passengerDTOS.size()));
     }
 
     @GetMapping(value = "getTripPassengers/{tripId}")
     @ResponseBody
-    public String getTripPassengers(HttpServletRequest request,
+    public String getTripPassengers(Principal principal,
                                     @PathVariable @ObjectIdConstraint ObjectId tripId) {
-        //todo userId
-        return passengerService.getTripPassengers(FAKE_USER_ID, tripId);
+        return passengerService.getTripPassengers(getUserId(principal), tripId);
     }
 
 }

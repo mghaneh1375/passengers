@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static bogen.studio.passengers.Utility.Statics.*;
-import static bogen.studio.passengers.Utility.Utility.generateSuccessMsg;
+import static bogen.studio.commonkoochita.Utility.Statics.*;
+import static bogen.studio.commonkoochita.Utility.Utility.generateSuccessMsg;
 
 @Service
 public class PassengerService {
@@ -32,8 +32,6 @@ public class PassengerService {
 
     public String list(ObjectId userId) {
 
-        //todo: userId
-        userId = FAKE_USER_ID;
         List<Passenger> passengers = passengerRepository.findByUserId(userId);
 
         JSONArray jsonArray = new JSONArray();
@@ -54,9 +52,6 @@ public class PassengerService {
     }
 
     public String store(ObjectId userId, PassengerDTO createdBy, List<PassengerDTO> passengerDTO) {
-
-        //todo: userId
-        userId = FAKE_USER_ID;
 
         List<Passenger> modified = new ArrayList<>();
         List<ObjectId> ids = new ArrayList<>();
@@ -121,9 +116,6 @@ public class PassengerService {
     }
 
     public String remove(ObjectId userId, ObjectId id) {
-
-        //todo: userId
-        userId = FAKE_USER_ID;
 
         Passenger passenger = passengerRepository.findByUserIdAndId(userId, id);
         if(passenger == null)

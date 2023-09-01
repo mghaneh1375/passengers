@@ -3,7 +3,7 @@ spring:
     mongodb:
       host: 'localhost'
       port: 27017
-      database: 'passenger'
+      database: 'koochita'
 
   servlet:
     multipart:
