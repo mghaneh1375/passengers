@@ -1,7 +1,7 @@
 package bogen.studio.passengers.Repository;
 
 
-import bogen.studio.commonkoochita.Model.User;
+import my.common.commonkoochita.Model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;

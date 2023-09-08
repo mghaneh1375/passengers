@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static bogen.studio.commonkoochita.Utility.Statics.*;
-import static bogen.studio.commonkoochita.Utility.Utility.generateSuccessMsg;
+import static my.common.commonkoochita.Utility.Statics.*;
+import static my.common.commonkoochita.Utility.Utility.generateSuccessMsg;
 
 @Service
 public class PassengerService {

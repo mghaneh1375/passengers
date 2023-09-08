@@ -5,7 +5,7 @@ import bogen.studio.passengers.Repository.TripRepository;
 
 import java.util.*;
 
-import static bogen.studio.commonkoochita.Utility.Statics.ONE_HOUR_MSEC;
+import static my.common.commonkoochita.Utility.Statics.ONE_HOUR_MSEC;
 
 public class Jobs implements Runnable {
 

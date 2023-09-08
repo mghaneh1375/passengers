@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-import static bogen.studio.commonkoochita.Security.Utility.getUsernameFromToken;
+import static my.common.commonkoochita.Security.Utility.getUsernameFromToken;
 
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {

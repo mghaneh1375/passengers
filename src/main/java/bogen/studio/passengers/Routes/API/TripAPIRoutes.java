@@ -1,7 +1,7 @@
 package bogen.studio.passengers.Routes.API;
 
-import bogen.studio.commonkoochita.Router.Router;
-import bogen.studio.commonkoochita.Utility.ValidList;
+import my.common.commonkoochita.Router.Router;
+import my.common.commonkoochita.Utility.ValidList;
 import bogen.studio.passengers.DTO.PassengerDTO;
 import bogen.studio.passengers.Service.PassengerService;
 import bogen.studio.passengers.Validator.ObjectIdConstraint;
@@ -27,14 +27,14 @@ public class TripAPIRoutes extends Router {
     @ResponseBody
     public String store(Principal principal,
                         @RequestBody @Valid @Size(min = 1) ValidList<PassengerDTO> passengerDTOS) {
-        return passengerService.store(getUserId(principal), passengerDTOS.get(0), passengerDTOS.subList(1, passengerDTOS.size()));
+        return passengerService.store(new ObjectId(getUserId(principal)), passengerDTOS.get(0), passengerDTOS.subList(1, passengerDTOS.size()));
     }
 
     @GetMapping(value = "getTripPassengers/{tripId}")
     @ResponseBody
     public String getTripPassengers(Principal principal,
                                     @PathVariable @ObjectIdConstraint ObjectId tripId) {
-        return passengerService.getTripPassengers(getUserId(principal), tripId);
+        return passengerService.getTripPassengers(new ObjectId(getUserId(principal)), tripId);
     }
 
 }
