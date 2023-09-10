@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(path = "/api/system/trip")
@@ -19,8 +18,7 @@ public class SystemTripAPIRoutes {
 
     @GetMapping(value = "getTripPassengers/{tripId}/{userId}")
     @ResponseBody
-    public String getTripPassengers(HttpServletRequest request,
-                                    @PathVariable @ObjectIdConstraint ObjectId tripId,
+    public String getTripPassengers(@PathVariable @ObjectIdConstraint ObjectId tripId,
                                     @PathVariable @ObjectIdConstraint ObjectId userId) {
         //todo authorize
         return passengerService.getTripPassengers(userId, tripId);
