@@ -69,5 +69,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+        catch (RuntimeException ex) {
+            response.setStatus(401);
+            return;
+        }
     }
 }
