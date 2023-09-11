@@ -35,8 +35,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         if (header == null || !header.startsWith("Bearer ")) {
             response.setStatus(401);
             return;
-//            chain.doFilter(request, response);
-//            return;
         }
 
         try {
@@ -48,9 +46,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             if(userDetails == null) {
                 response.setStatus(401);
                 return;
-
-//                chain.doFilter(request, response);
-//                return;
             }
 
             UsernamePasswordAuthenticationToken
@@ -71,7 +66,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         }
         catch (RuntimeException ex) {
             response.setStatus(401);
-            return;
         }
     }
 }
