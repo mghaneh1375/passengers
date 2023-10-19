@@ -28,7 +28,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests( authorizeHttpRequests -> authorizeHttpRequests
                         .antMatchers("/api/user/**").permitAll()
                         .antMatchers("/api/system/trip/getTripPassengers/**").permitAll()
-                        .antMatchers("/api/public/**").permitAll()
                         .antMatchers("/static/**", "/favicon.ico").permitAll()
                         .anyRequest().authenticated())
         ;
